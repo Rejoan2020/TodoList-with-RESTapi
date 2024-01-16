@@ -12,7 +12,7 @@ const Todos = (props) => {
       {props.items.length===0?"No items to display":
         props.items.map((item)=>{
             return <TodoItem todo={item} key = {item.sn} onDelete = {props.onDelete}
-            onUpdate = {props.onUpdate}
+            onEdit = {props.onEdit}
             />
           }
         )

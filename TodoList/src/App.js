@@ -12,34 +12,40 @@ import {
   Route,
 } from "react-router-dom";
 
+let id;
 function App() {
   let initialItems=[];
-  // const [title,setTitle] = useState("");
-  // const [desc,setDesc] = useState("");
 
-  const onUpdate = (item)=>{
-    console.log(item.id);
+  const [title,setTitle] = useState("");
+  const [desc,setDesc] = useState("");
+
+  const onEdit = (item) => {
+    setTitle(item.taskname)
+    setDesc(item.description)
+    id = item.id;
   }
+
   const onDelete = (item)=>{
     const deleteTodo = async (todoId) => {
       try {
-        console.log(todoId)
+        // console.log(todoId)
         await axios.delete(`http://localhost:8000/api/delete/${todoId}/`); 
         //to display the change
         setitems(items.filter((e)=>{
           return e!==item;
-        })) 
+        }))
         console.log('Todo item deleted successfully');
       } catch (error) {
         console.error('Error deleting todo item:', error);
       }
     };
     // console.log(item.id)
-    console.log(item);
+    // setTitle("delete")
     deleteTodo(item.id);
   }
   
   const [items,setitems] = useState(initialItems)
+
   let addTodo = (title,desc)=>{
     // console.log(title,desc);
     // let sno;
@@ -53,7 +59,7 @@ function App() {
     const sendDataToDjango = async (data) => {
       try {
         const response = await axios.post('http://localhost:8000/api/create/', data);
-        console.log('Data sent successfully:', response.data);
+        // console.log('Data sent successfully:', response.data);
         mytodo.id = response.data.id
       } catch (error) {
         console.error('Error sending data:', error);
@@ -62,7 +68,7 @@ function App() {
     sendDataToDjango(mytodo);
     // console.log("sn :" + sno);
     setitems([...items,mytodo]);
-  }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,7 +82,36 @@ function App() {
 
     fetchData();
   },[]);
-
+  let onUpdate = ()=>{
+    // console.log(id);
+    let updatedTodo={
+      id : id,
+      taskname: title,
+      description: desc
+    }
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/list/');
+        setitems(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    const updateData = async (id, newData) => {
+      try {
+          const response = await axios.post(`http://localhost:8000/api/update/${id}/`, newData);
+          console.log('Data updated successfully:', response.data);
+          await fetchData();
+      } catch (error) {
+          console.error('Error updating data:', error);
+      }
+  };
+  console.log(id);
+  updateData(id,updatedTodo);    
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+  }
   return (
     <>
     <Router>
@@ -86,9 +121,13 @@ function App() {
           <Route exact path="/" Component = {()=>{
             return (
               <>
-                <AddTodo addTodo = {addTodo}/>
-                <Todos items = {items} onDelete = {onDelete} onUpdate = {onUpdate}/>
-                {/* <Todos items = {items} onUpdate = {onUpdate}/> */}
+                {AddTodo({addTodo:addTodo,
+                setTitle:setTitle,setDesc:setDesc,
+                title:title,desc:desc,
+                onUpdate:onUpdate
+              }
+                  )}
+                <Todos items = {items} onDelete = {onDelete} onEdit = {onEdit}/>
               </>
             )
           }}>

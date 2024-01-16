@@ -7,7 +7,7 @@ const TodoItem = (props) => {
         <h4>{props.todo.taskname}</h4>
         <p>{props.todo.description}</p>
         <button className='btn btn-sm btn-danger' onClick = {()=>{props.onDelete(props.todo)}}> Delete</button>
-        <button className="m-3 btn btn-sm btn-success" onClick={()=>{props.onUpdate(props.todo)}}>Edit</button>
+        <button className='m-1 btn btn-sm btn-success' onClick = {()=>{props.onEdit(props.todo)}}> Edit</button>
     </div>
   )
 }
