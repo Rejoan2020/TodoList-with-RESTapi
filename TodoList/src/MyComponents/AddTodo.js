@@ -21,10 +21,9 @@ const AddTodo = (props) => {
           props.addTodo(props.title,props.desc);
         }
       else if(btype==="update"){
-        console.log("update");
+        // console.log("update");
         props.onUpdate();
       }
-      
       props.setDesc("");
       props.setTitle("");
       f1 = false;
@@ -38,11 +37,11 @@ const AddTodo = (props) => {
         <form onSubmit={submit}>
         <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
-            <input type="text" autoFocus={f1} value={props.title} className="form-control" onChange={(e)=>{oc1(e.target.value)}} id="title"/>
+            <input type="text" autoFocus={f1} value={props.title} style={{ width: '50%', height: '2%' }} className="form-control" onChange={(e)=>{oc1(e.target.value)}} id="title"/>
         </div>
         <div className="mb-3">
             <label htmlFor="desc" className="form-label">Description</label>
-            <input type="text" autoFocus={f2} value = {props.desc} className="form-control" onChange={(e)=>{oc2(e.target.value)}} id="text"/>
+            <input type="text" autoFocus={f2} value = {props.desc} style={{ width: '50%', height: '2%' }} className="form-control" onChange={(e)=>{oc2(e.target.value)}} id="text"/>
         </div>
         
         <button type="submit"  onClick={submit('submit')} className="btn btn-sm btn-success">Add</button>

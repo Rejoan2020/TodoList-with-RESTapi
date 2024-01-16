@@ -12,7 +12,7 @@ import {
   Route,
 } from "react-router-dom";
 
-let id;
+let id,pressEdit=false;
 function App() {
   let initialItems=[];
 
@@ -23,12 +23,12 @@ function App() {
     setTitle(item.taskname)
     setDesc(item.description)
     id = item.id;
+    pressEdit=true;
   }
 
   const onDelete = (item)=>{
     const deleteTodo = async (todoId) => {
       try {
-        // console.log(todoId)
         await axios.delete(`http://localhost:8000/api/delete/${todoId}/`); 
         //to display the change
         setitems(items.filter((e)=>{
@@ -39,18 +39,12 @@ function App() {
         console.error('Error deleting todo item:', error);
       }
     };
-    // console.log(item.id)
-    // setTitle("delete")
     deleteTodo(item.id);
   }
   
   const [items,setitems] = useState(initialItems)
 
   let addTodo = (title,desc)=>{
-    // console.log(title,desc);
-    // let sno;
-    // if(items.length===0) sno = 1;
-    // else sno = items[items.length-1].id+1;
     const mytodo = {
       id : 0,
       taskname: title,
@@ -58,22 +52,19 @@ function App() {
     }
     const sendDataToDjango = async (data) => {
       try {
-        const response = await axios.post('http://localhost:8000/api/create/', data);
-        // console.log('Data sent successfully:', response.data);
+        const response = await axios.post('http://localhost:8000/api/create/', data); 
         mytodo.id = response.data.id
       } catch (error) {
         console.error('Error sending data:', error);
       }
     };
-    sendDataToDjango(mytodo);
-    // console.log("sn :" + sno);
+    sendDataToDjango(mytodo); 
     setitems([...items,mytodo]);
   };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/list/');
-        // console.log(response.data[0].id)
+        const response = await axios.get('http://localhost:8000/api/list/'); 
         setitems([...response.data]);
       } catch (error) {
         console.error('Error fetching data: ', error);
@@ -82,8 +73,11 @@ function App() {
 
     fetchData();
   },[]);
-  let onUpdate = ()=>{
-    // console.log(id);
+  let onUpdate = ()=>{ 
+    if(!pressEdit){
+      alert("Please select a specific todo from the list!")
+      return;
+    }
     let updatedTodo={
       id : id,
       taskname: title,
@@ -107,15 +101,19 @@ function App() {
       }
   };
   console.log(id);
-  updateData(id,updatedTodo);    
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  updateData(id,updatedTodo);
+  pressEdit=false;
   }
+  const containerStyle = {
+    backgroundColor: " #b1dace ",
+    padding: '20px',
+    borderRadius: '8px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  };
   return (
-    <>
     <Router>
       <Header title="My-todos-list" searchbar={true}/>
+      <div style={containerStyle}>
       <Routes>
           <Route exact path="/about" Component={About}></Route>
           <Route exact path="/" Component = {()=>{
@@ -132,10 +130,10 @@ function App() {
             )
           }}>
           </Route>
-        </Routes>
+      </Routes>
+      </div>
       <Footer/>
     </Router>
-    </>
   );
 }
 
