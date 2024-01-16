@@ -9,8 +9,9 @@ Key features
 - Delete
 
 CRUD operations with django rest framework is implemented along with the front-end by reactJS.Besides, JSX,HTML,CSS,Bootstrap are used to build this site.
-![1](https://github.com/Rejoan2020/TodoList-with-RESTapi/assets/63773925/cf19d1b7-3601-424b-8cad-33c36a400b98)
-Demo
+
+![0](https://github.com/Rejoan2020/TodoList-with-RESTapi/assets/63773925/8abc22cf-7e59-43c9-b39c-5f89dddba80d)
+
 
 How to run this project in local host:
 1. clone this project to your device
