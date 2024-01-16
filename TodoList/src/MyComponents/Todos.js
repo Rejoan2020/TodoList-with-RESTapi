@@ -2,13 +2,20 @@ import React from 'react'
 import TodoItem from './TodoItem'
 
 const Todos = (props) => {
-  let mystyle = {
+  
+  const containerStyle = {
     minHeight: "60vh",
-    margin: '40px auto'
-  }
+    // margin: '30px 0 0 0px',
+    backgroundColor: 'white', 
+    padding: '20px',
+    width:'50%',
+    // justifyContent: 'center',
+    // alignItems: 'center', 
+  };
   return (
-    <div className='container' style={mystyle}>
-      <h3 className='my-3'>Todos list !</h3>
+    <div className='container' style={containerStyle}>
+      <div >
+        <h3><strong>Todos list</strong></h3>
       {props.items.length===0?"No items to display":
         props.items.map((item)=>{
             return <TodoItem todo={item} key = {item.sn} onDelete = {props.onDelete}
@@ -17,6 +24,7 @@ const Todos = (props) => {
           }
         )
       }
+      </div>
     </div>
   )
 }

@@ -105,14 +105,15 @@ function App() {
   pressEdit=false;
   }
   const containerStyle = {
-    backgroundColor: " #b1dace ",
+    backgroundColor: " #5df9da  ",
     padding: '20px',
     borderRadius: '8px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   };
+  
   return (
     <Router>
-      <Header title="My-todos-list" searchbar={true}/>
+      <Header title="Todo App" searchbar={true}/>
       <div style={containerStyle}>
       <Routes>
           <Route exact path="/about" Component={About}></Route>

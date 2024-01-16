@@ -5,7 +5,8 @@ var f1 = false,f2 = false;
 const AddTodo = (props) => {
   let oc1 =(val)=>{
     console.log(f1)
-    f1 = true;f2 = false;
+    f1 = true;
+    f2 = false;
     props.setTitle(val);
   }
   let oc2 =(val)=>{
@@ -30,13 +31,17 @@ const AddTodo = (props) => {
       f2 = false;
     }
   }
-
+  const containerStyle = {
+    backgroundColor: 'white', 
+    padding: '20px',
+    width:'50%',
+  };
   return (
-    <div className='container'>
+    <div className='container' style={containerStyle}>
         <h3>Add todo</h3>
         <form onSubmit={submit}>
         <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
+            <label htmlFor="title" className="form-label">Title </label>
             <input type="text" autoFocus={f1} value={props.title} style={{ width: '50%', height: '2%' }} className="form-control" onChange={(e)=>{oc1(e.target.value)}} id="title"/>
         </div>
         <div className="mb-3">

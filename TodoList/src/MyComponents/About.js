@@ -3,16 +3,32 @@ import React from "react";
 const About = () => {
   let myStyle = {
     minHeight: "90vh",
-    position: "Relative",
+    // position: "Relative",
+    backgroundColor: "white",
+    width:"30%",
+    padding: "20px"
   };
+  
   return (
     <div style={myStyle}>
-      <h3>About</h3>
+      <h1>About</h1>
+      <br></br>
       <p>
-        Welcome to MyTodoApp – your go-to task management solution designed to
-        simplify your daily life! Our web application, powered by React.js,<br/>
-        provides an intuitive and efficient way to organize your tasks, boost
-        productivity, and ensure you never miss a deadline.
+        <h4>features</h4>
+        <ul>
+          <li>
+            Create
+          </li>
+          <li>
+            Read
+          </li>
+          <li>
+            Update
+          </li>
+          <li>
+            Delete
+          </li>
+        </ul>
       </p>
     </div>
   );

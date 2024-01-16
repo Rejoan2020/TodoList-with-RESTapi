@@ -1,8 +1,13 @@
 import React from 'react'
 
 const TodoItem = (props) => {
+  const containerStyle = {
+    backgroundColor: 'lightblue', 
+    padding: '20px',
+    // width:'70%'
+  };
   return (
-    <div className='container my-2'>
+    <div className='container my-3' style={containerStyle}>
 
         <h4>{props.todo.taskname}</h4>
         <p>{props.todo.description}</p>
