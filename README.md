@@ -11,7 +11,6 @@ Key features
 CRUD operations with django rest framework is implemented along with the front-end by reactJS.Besides, JSX,HTML,CSS,Bootstrap are used to build this site.
 
 Demo
-//I will add demo later
 
 How to run this project in local host:
 1. clone this project to your device
