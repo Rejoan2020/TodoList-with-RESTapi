@@ -23,8 +23,10 @@ How to run this project in local host:
 7. run "npm start".
 8. Here you go. You should be able to see the site with a new tab in your browser.
 
-Contribute
 ![17 01 2024_01 59 20_REC-ezgif com-video-to-gif-converter](https://github.com/Rejoan2020/TodoList-with-RESTapi/assets/63773925/84dd956d-93b0-4c43-89ef-be08dccd62c9)
+
+
+Contribution
 
 As a free and open-source project, we are grateful to anyone who wants to contribute. 
 
